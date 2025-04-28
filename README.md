@@ -1,42 +1,57 @@
-# DLL Injector
+# encTeamed Injector
+
+`encTeamed Injector` is a utility for injecting a DLL into a target process using **Manual Mapping**. This method allows injecting a DLL into the memory of a process without using standard API functions like `LoadLibrary`, making the injection more stealthy and harder to detect.
 
 ## Description
-This project is a DLL Injector written in C++ that allows you to inject a selected DLL file into a specified process. The program utilizes standard Windows API functions to interact with processes and threads, allocate memory, and execute code within the target process.
 
-## Features
-- Opens a file dialog to select a DLL file.
-- Allows you to select a target process for injection.
-- Uses Windows API functions to inject the DLL into the process.
+This project utilizes **Windows API** and low-level functions to inject a DLL into the target process's memory. It features a simple dialog for selecting a DLL file and a target process for injection. The injection is performed using manual mapping, which ensures that the process remains undetected by common antivirus software.
 
-## How It Works
-1. The user selects a DLL file using the file dialog.
-2. The user specifies the target process by entering its name.
-3. The injector locates the process by its name and attempts to inject the selected DLL into it.
-4. The injection process is carried out by allocating memory in the target process, writing the DLL path into that memory, and using the `LoadLibraryW` function to load the DLL into the process's memory space.
+### Key Features
+- **Manual Mapping**: Injects DLLs using manual mapping, bypassing the standard `LoadLibrary` API.
+- **Loading Animation**: Displays a simple loading animation during the injection process.
+- **File Dialog**: Allows the user to select the DLL to inject.
+- **Process List**: Displays a list of running processes for easy selection of the target process.
+
+## How it Works
+
+1. **DLL Selection**: The user is prompted to choose a DLL file to inject into the target process.
+2. **Process Selection**: After selecting the DLL, the user is prompted to enter the name of the target process.
+3. **Manual Mapping**: The tool performs manual mapping of the DLL into the target process's memory by allocating space, copying headers and sections, and creating a new thread to start the DLL's execution.
 
 ## Requirements
-- Windows Operating System
-- Visual Studio or any C++ compatible IDE for building the project.
-- Administrator privileges may be required for injecting into system processes.
 
-## Compilation
-To compile the project, follow these steps:
-1. Open the project in Visual Studio (or your preferred IDE).
-2. Build the project in **Release** mode.
-3. Run the compiled executable with **Administrator privileges**.
+- **Windows Operating System**: The injector relies on Windows-specific APIs.
+- **Visual Studio**: For compiling the source code.
+- **ntdll.lib**: The project uses functions from `ntdll.dll`, so you must link with `ntdll.lib`.
 
-## Usage
-1. Launch the program.
-2. Select the DLL file to inject.
-3. Enter the process name you want to inject the DLL into (e.g., `notepad.exe`).
-4. The program will find the process and inject the DLL.
+## How to Use
+
+1. **Compile the Code**: Build the project in Visual Studio.
+2. **Run the Injector**: Execute the compiled injector.
+3. **Select the DLL**: Use the file dialog to choose the DLL you wish to inject.
+4. **Enter the Process Name**: After selecting the DLL, enter the name of the target process you want to inject into (e.g., `example.exe`).
+5. **Injection**: The DLL is injected into the selected process using manual mapping.
+
+## Functions
+
+- `AnimateLoading`: Displays an animation while the injector is running.
+- `OpenFileDialog`: Opens a dialog to select the DLL to inject.
+- `GetProcessList`: Retrieves the list of running processes.
+- `FindProcessId`: Finds the process ID based on the process name.
+- `ManualMapInject`: Handles the manual mapping injection process.
 
 ## Notes
-- Make sure the DLL you are trying to inject is compatible with the target process.
-- The injection method used in this project may trigger antivirus software or security software, as it involves modifying the memory of another running process.
-  
+
+- **Error Handling**: The injector handles several error cases such as invalid DLL format, failure to open processes, and memory allocation issues.
+- **Compatibility**: This tool works on modern 64-bit Windows systems.
+
 ## Disclaimer
-This tool is intended for educational purposes only. Use responsibly and ensure you have permission to interact with the target processes. Unauthorized use may violate the terms of service of certain applications or platforms.
+
+This tool is intended for educational purposes only. Use it responsibly and ensure you have permission to perform injections in the processes you are targeting. Unauthorized usage may violate terms of service or laws in your region.
+
+---
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
