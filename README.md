@@ -1,6 +1,6 @@
 # encTeamed Injector
 
-`encTeamed Injector` is a utility for injecting a DLL into a target process using **Manual Mapping**. This method allows injecting a DLL into the memory of a process without using standard API functions like `LoadLibrary`, making the injection more stealthy and harder to detect.
+`encTeamed Injector` is a utility for injecting a DLL into a target process using **Manual Mapping**. This method allows injecting a DLL into the memory of a process without using stealth api methods, making the injection more stealthy and harder to detect.
 
 ## Description
 
